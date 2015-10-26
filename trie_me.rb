@@ -1,10 +1,4 @@
 class TrieMe
-  # irb
-  # dict_words = File.read('/usr/share/dict/words')
-  # split_dict_words = dict_words.split("\n")
-  # t = TrieMe.new
-  # split_dict_words.each { |word| t.insert(word) }
-
   def initialize
     @tree = Node.new
   end
