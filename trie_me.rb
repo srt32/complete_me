@@ -41,14 +41,24 @@ class Node
 
     word.split("").each do |letter|
       current_node = current_letters[letter]
+
+      if current_node.nil?
+        leaf_search_node =nil
+        break
+      end
+
       current_letters = current_node.letters
       leaf_search_node = current_node
     end
 
     word_recommendations = []
+    if leaf_search_node.nil?
+      return word_recommendations
+    end
+
     leaf_search_node.letters.each do |letter, node|
       if node.isComplete
-        word_recommendations.push(word + leaf_search_node.letters.keys.first)
+        word_recommendations.push(word + letter)
       end
     end
 
