@@ -1,4 +1,10 @@
 class TrieMe
+  # irb
+  # dict_words = File.read('/usr/share/dict/words')
+  # split_dict_words = dict_words.split("\n")
+  # t = TrieMe.new
+  # split_dict_words.each { |word| t.insert(word) }
+
   def initialize
     @tree = Node.new
   end
@@ -36,6 +42,11 @@ class Node
 
   def branch_for(word)
     leaf_search_node = find_leaf_search_node(word, @letters)
+
+    if leaf_search_node.nil?
+      return []
+    end
+
     find_words_from_leaf_search(leaf_search_node, word)
   end
 
@@ -47,23 +58,19 @@ class Node
     word.split("").each do |letter|
       current_node = current_letters[letter]
 
-      if current_node.nil?
+      if current_node.nil? # no results
         leaf_search_node = nil
         break
       end
 
-      current_letters = current_node.letters
       leaf_search_node = current_node
+      current_letters = current_node.letters
     end
 
     leaf_search_node
   end
 
   def find_words_from_leaf_search(leaf_search_node, word)
-    if leaf_search_node.nil?
-      return []
-    end
-
     completions = search_for_completions(leaf_search_node)
 
     completions.map do |completion|
