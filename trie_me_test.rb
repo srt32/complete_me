@@ -39,11 +39,12 @@ class TrieMeTest < Minitest::Test
     trieme = TrieMe.new
     trieme.insert("cat")
     trieme.insert("pizza")
+    trieme.insert("pizzas")
     trieme.insert("pizzeria")
-    trieme.insert("piizzicato")
+    trieme.insert("pizzicato")
 
-    results = trieme.complete("piz")
-    assert_equal(["pizza", "pizzeria", "pizzicato"], results)
+    results = trieme.complete("pizz")
+    assert_equal(["pizza", "pizzas", "pizzeria", "pizzicato"], results)
   end
 end
 

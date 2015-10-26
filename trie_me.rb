@@ -63,13 +63,25 @@ class Node
       return word_recommendations
     end
 
-    leaf_search_node.letters.each do |letter, node|
-      if node.isComplete
-        word_recommendations.push(word + letter)
-      end
+    completions = search_for_completions(leaf_search_node)
+
+    completions.each do |completion|
+      word_recommendations.push(word + completion)
     end
 
-    # if node is not complete and there are letters keep going
     word_recommendations
+  end
+
+  def search_for_completions(node, previous_letters = "", completions = [])
+    node.letters.each do |letter, node|
+      partial_completion = previous_letters + letter
+
+      if node.isComplete
+        completions.push(partial_completion)
+      end
+      search_for_completions(node, partial_completion, completions)
+    end
+
+    completions
   end
 end
