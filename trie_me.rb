@@ -35,7 +35,13 @@ class Node
   end
 
   def branch_for(word)
-    current_letters = @letters
+    leaf_search_node = find_leaf_search_node(word, @letters)
+    find_words_from_leaf_search(leaf_search_node, word)
+  end
+
+  private
+
+  def find_leaf_search_node(word, current_letters)
     leaf_search_node = nil
 
     word.split("").each do |letter|
@@ -50,10 +56,8 @@ class Node
       leaf_search_node = current_node
     end
 
-    find_words_from_leaf_search(leaf_search_node, word)
+    leaf_search_node
   end
-
-  private
 
   def find_words_from_leaf_search(leaf_search_node, word)
     if leaf_search_node.nil?
