@@ -4,7 +4,6 @@ class TrieMe
   end
 
   def insert(word)
-    # TODO: clean word input
     current_node = @tree
 
     word.split("").each_with_index do |letter, character_position|
@@ -57,19 +56,15 @@ class Node
   private
 
   def find_words_from_leaf_search(leaf_search_node, word)
-    word_recommendations = []
-
     if leaf_search_node.nil?
-      return word_recommendations
+      return []
     end
 
     completions = search_for_completions(leaf_search_node)
 
-    completions.each do |completion|
-      word_recommendations.push(word + completion)
+    completions.map do |completion|
+      word + completion
     end
-
-    word_recommendations
   end
 
   def search_for_completions(node, previous_letters = "", completions = [])
@@ -79,6 +74,7 @@ class Node
       if node.isComplete
         completions.push(partial_completion)
       end
+
       search_for_completions(node, partial_completion, completions)
     end
 
