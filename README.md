@@ -1,6 +1,6 @@
 A Ruby implementation of an autocomplete engine.
 
-Based off [Turing School's]() [example assignment]().
+Based off [Turing School's](http://turing.io/) [example assignment](https://github.com/turingschool/curriculum/blob/master/source/projects/complete_me.markdown).
 
 Assuming you're on OSX:
 
