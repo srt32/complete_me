@@ -43,7 +43,7 @@ class Node
       current_node = current_letters[letter]
 
       if current_node.nil?
-        leaf_search_node =nil
+        leaf_search_node = nil
         break
       end
 
@@ -51,7 +51,14 @@ class Node
       leaf_search_node = current_node
     end
 
+    find_words_from_leaf_search(leaf_search_node, word)
+  end
+
+  private
+
+  def find_words_from_leaf_search(leaf_search_node, word)
     word_recommendations = []
+
     if leaf_search_node.nil?
       return word_recommendations
     end
@@ -62,6 +69,7 @@ class Node
       end
     end
 
+    # if node is not complete and there are letters keep going
     word_recommendations
   end
 end
