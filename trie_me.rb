@@ -52,6 +52,17 @@ class Node
 
   private
 
+  # refactor to return sorted by score
+  def find_words_from_leaf_search(leaf_search_node, word)
+    completions = search_for_completions(leaf_search_node)
+
+    # TODO: order by weight desc
+
+    completions.map do |completion|
+      word + completion
+    end
+  end
+
   def find_leaf_search_node(word, current_letters)
     leaf_search_node = nil
 
@@ -70,16 +81,9 @@ class Node
     leaf_search_node
   end
 
-  def find_words_from_leaf_search(leaf_search_node, word)
-    completions = search_for_completions(leaf_search_node)
-
-    completions.map do |completion|
-      word + completion
-    end
-  end
-
   def search_for_completions(node, previous_letters = "", completions = [])
     node.letters.each do |letter, node|
+      # TODO: refactor to handle storage of weight
       partial_completion = previous_letters + letter
 
       if node.isComplete
